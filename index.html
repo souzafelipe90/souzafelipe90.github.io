@@ -20,6 +20,19 @@
       --white: #f5f5f5;
     }
 
+    body.light {
+      --bg: #f9f7f4;
+      --surface: #f0ede8;
+      --border: #ddd8d0;
+      --text: #2a2a2a;
+      --muted: #888;
+      --dim: #bbb;
+      --orange: #b45309;
+      --orange-dim: #d97706;
+      --green: #166534;
+      --white: #111;
+    }
+
     body {
       font-family: 'Courier New', Courier, monospace;
       font-size: 14px;
@@ -54,6 +67,29 @@
     }
 
     .topbar-path .seg { color: var(--orange); }
+
+    .topbar-controls {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+    }
+
+    .theme-toggle, .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .theme-toggle:hover, .lang-toggle:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
 
     /* Header */
     header { margin-bottom: 40px; }
@@ -311,12 +347,13 @@
 <body>
 
   <div class="topbar">
-    <span class="dot dot-red"></span>
-    <span class="dot dot-yellow"></span>
-    <span class="dot dot-green"></span>
     <span class="topbar-path">
       ~/<span class="seg">felipe-souza</span>/<span class="seg">cv.md</span>
     </span>
+    <div class="topbar-controls">
+      <button class="lang-toggle" onclick="toggleLang()" id="lang-btn">[ en ]</button>
+      <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">[ light ]</button>
+    </div>
   </div>
 
   <header>
@@ -328,7 +365,7 @@
           <span class="prompt-cmd">whoami</span>
         </div>
         <h1>Felipe Souza<span class="cursor"></span></h1>
-        <p class="header-role"># Analista de Monitoramento · Inteligência de Dados · Gestão da Informação</p>
+        <p class="header-role" data-i18n="role"># Analista de Monitoramento · Inteligência de Dados · Gestão da Informação</p>
         <p class="header-contact">
           <a href="https://wa.me/5561982236407" target="_blank" rel="noopener">(61) 98223-6407</a>
           <span class="sep">|</span>
@@ -337,6 +374,14 @@
           <a href="https://github.com/souzafelipe90" target="_blank" rel="noopener">GitHub</a>
           <span class="sep">|</span>
           <a href="https://br.linkedin.com/in/oifelipe" target="_blank" rel="noopener">LinkedIn</a>
+          <span class="sep">|</span>
+          <a href="#" download data-i18n="download">Download CV</a>
+          <span class="sep">|</span>
+          <a href="#">Datasets</a>
+          <span class="sep">|</span>
+          <a href="#">Scripts</a>
+          <span class="sep">|</span>
+          <a href="#" data-i18n="publications">Publicações</a>
         </p>
       </div>
     </div>
@@ -345,9 +390,9 @@
   <section>
     <div class="section-header">
       <span class="cmd">$ cat</span>
-      <span class="label">perfil</span>
+      <span class="label" data-i18n="sec-profile">perfil</span>
     </div>
-    <p class="summary-text">
+    <p class="summary-text" data-i18n="profile-text">
       Sociólogo e Mestre em Desenvolvimento Local, com ampla experiência como pesquisador,
       analista e consultor em políticas sociais, especialmente na área de educação. Atuação
       em agências, programas e fundos do Sistema ONU no Brasil e no Terceiro Setor. Expertise
@@ -359,103 +404,103 @@
   <section>
     <div class="section-header">
       <span class="cmd">$ cat</span>
-      <span class="label">experiência profissional</span>
+      <span class="label" data-i18n="sec-experience">experiência profissional</span>
     </div>
     <div class="entry">
-      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-org" data-i18n="e1-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
       <div class="entry-meta">
-        <div class="entry-role">Consultor Especialista em Gestão da Informação e do Conhecimento</div>
+        <div class="entry-role" data-i18n="e1-role">Consultor Especialista em Gestão da Informação e do Conhecimento</div>
         <div class="entry-period">Dez 2023 – Mar 2025</div>
       </div>
       <div class="entry-location">Home-based</div>
-      <p>Análise quantitativa e qualitativa de dados em educação, proteção social, saúde, nutrição e WASH. Elaboração de relatórios técnicos e desenvolvimento de estratégias de gestão do conhecimento para subsidiar decisões em contextos humanitários — com uso intensivo de <strong>Python</strong>, <strong>R</strong> e ferramentas de visualização de dados.</p>
+      <p data-i18n="e1-desc">Análise quantitativa e qualitativa de dados em educação, proteção social, saúde, nutrição e WASH. Elaboração de relatórios técnicos e desenvolvimento de estratégias de gestão do conhecimento para subsidiar decisões em contextos humanitários — com uso intensivo de <strong>Python</strong>, <strong>R</strong> e ferramentas de visualização de dados.</p>
     </div>
 
     <div class="entry">
       <div class="entry-org">Instituto Unibanco</div>
       <div class="entry-meta">
-        <div class="entry-role">Gestor de Implementação III — Analista de Dados em Políticas Públicas</div>
+        <div class="entry-role" data-i18n="e2-role">Gestor de Implementação III — Analista de Dados em Políticas Públicas</div>
         <div class="entry-period">Set 2022 – Out 2023</div>
       </div>
       <div class="entry-location">São Paulo, SP</div>
-      <p>Monitoramento de projetos junto à Secretaria de Educação de Minas Gerais, com coleta, tratamento e análise de dados sobre matrícula, permanência e aprendizagem. Uso de <strong>Power BI</strong> e <strong>Looker Studio</strong> para construção de painéis e apoio à tomada de decisão de gestores públicos.</p>
+      <p data-i18n="e2-desc">Monitoramento de projetos junto à Secretaria de Educação de Minas Gerais, com coleta, tratamento e análise de dados sobre matrícula, permanência e aprendizagem. Uso de <strong>Power BI</strong> e <strong>Looker Studio</strong> para construção de painéis e apoio à tomada de decisão de gestores públicos.</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">Movimento Profissão Docente</div>
+      <div class="entry-org" data-i18n="e3-org">Movimento Profissão Docente</div>
       <div class="entry-meta">
-        <div class="entry-role">Consultor em Articulação de Redes</div>
+        <div class="entry-role" data-i18n="e3-role">Consultor em Articulação de Redes</div>
         <div class="entry-period">Set 2021 – Mai 2022</div>
       </div>
       <div class="entry-location">São Paulo, SP / Joinville, SC</div>
-      <p>Apoio a redes públicas municipais na implementação de políticas de formação docente, com diagnósticos baseados em <strong>indicadores públicos</strong> e <strong>microdados</strong> educacionais e elaboração de propostas técnicas para gestores.</p>
+      <p data-i18n="e3-desc">Apoio a redes públicas municipais na implementação de políticas de formação docente, com diagnósticos baseados em <strong>indicadores públicos</strong> e <strong>microdados</strong> educacionais e elaboração de propostas técnicas para gestores.</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">Associação Cidade-Escola Aprendiz</div>
+      <div class="entry-org" data-i18n="e4-org">Associação Cidade-Escola Aprendiz</div>
       <div class="entry-meta">
-        <div class="entry-role">Assistente de Monitoramento e Avaliação</div>
+        <div class="entry-role" data-i18n="e4-role">Assistente de Monitoramento e Avaliação</div>
         <div class="entry-period">Set 2021 – Dez 2021</div>
       </div>
       <div class="entry-location">Home-based</div>
-      <p>M&amp;A do programa Busca Ativa Escolar em Serra (ES) e Marabá (PA), com análise de dados, definição de indicadores e acompanhamento do desenvolvimento de sistemas informatizados para <strong>gestão da informação</strong> educacional.</p>
+      <p data-i18n="e4-desc">M&amp;A do programa Busca Ativa Escolar em Serra (ES) e Marabá (PA), com análise de dados, definição de indicadores e acompanhamento do desenvolvimento de sistemas informatizados para <strong>gestão da informação</strong> educacional.</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-org" data-i18n="e5-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
       <div class="entry-meta">
-        <div class="entry-role">Consultor Especialista em Gestão da Informação (M&amp;A)</div>
+        <div class="entry-role" data-i18n="e5-role">Consultor Especialista em Gestão da Informação (M&amp;A)</div>
         <div class="entry-period">Set 2020 – Abr 2021</div>
       </div>
       <div class="entry-location">Home-based</div>
-      <p>Monitoramento de indicadores de conectividade e infraestrutura escolar (WASH) na Amazônia Legal, com <strong>mapeamento GIS</strong> via <strong>ArcGIS</strong> e <strong>QGIS</strong> para análise espacial e orientação de estratégias locais.</p>
+      <p data-i18n="e5-desc">Monitoramento de indicadores de conectividade e infraestrutura escolar (WASH) na Amazônia Legal, com <strong>mapeamento GIS</strong> via <strong>ArcGIS</strong> e <strong>QGIS</strong> para análise espacial e orientação de estratégias locais.</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">IOM — ONU Migrações</div>
+      <div class="entry-org" data-i18n="e6-org">IOM — ONU Migrações</div>
       <div class="entry-meta">
-        <div class="entry-role">Assistente em Gestão da Informação (M&amp;A)</div>
+        <div class="entry-role" data-i18n="e6-role">Assistente em Gestão da Informação (M&amp;A)</div>
         <div class="entry-period">Ago 2019 – Dez 2019</div>
       </div>
       <div class="entry-location">Brasília, DF</div>
-      <p>Construção do plano de monitoramento e análise de dados para o RMRP 2020 — Plano Regional de Resposta Humanitária a Refugiados Venezuelanos, com foco em <strong>gestão da informação</strong> para inclusão social.</p>
+      <p data-i18n="e6-desc">Construção do plano de monitoramento e análise de dados para o RMRP 2020 — Plano Regional de Resposta Humanitária a Refugiados Venezuelanos, com foco em <strong>gestão da informação</strong> para inclusão social.</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-org" data-i18n="e7-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
       <div class="entry-meta">
-        <div class="entry-role">Oficial de Educação</div>
+        <div class="entry-role" data-i18n="e7-role">Oficial de Educação</div>
         <div class="entry-period">Jun 2018 – Ago 2019</div>
       </div>
       <div class="entry-location">Brasília, DF</div>
-      <p>Coordenação com redes estaduais e municipais de educação em programas nacionais, elaboração de <strong>relatórios analíticos</strong> e orientações técnicas para gestores públicos com base em dados e indicadores educacionais.</p>
+      <p data-i18n="e7-desc">Coordenação com redes estaduais e municipais de educação em programas nacionais, elaboração de <strong>relatórios analíticos</strong> e orientações técnicas para gestores públicos com base em dados e indicadores educacionais.</p>
     </div>
 
     <div class="entry">
       <div class="entry-org">SUNY New Paltz — State University of New York</div>
       <div class="entry-meta">
-        <div class="entry-role">Pesquisador Assistente</div>
+        <div class="entry-role" data-i18n="e8-role">Pesquisador Assistente</div>
         <div class="entry-period">Ago 2016 – Set 2017</div>
       </div>
       <div class="entry-location">Recife, PE</div>
-      <p>Aplicação, tratamento e <strong>análise de dados</strong> quantitativos na pesquisa "Mobilidade Social, Subjetividades e Classes no Brasil".</p>
+      <p data-i18n="e8-desc">Aplicação, tratamento e <strong>análise de dados</strong> quantitativos na pesquisa "Mobilidade Social, Subjetividades e Classes no Brasil".</p>
     </div>
 
     <div class="entry">
-      <div class="entry-org">UFRPE — Universidade Federal Rural de Pernambuco</div>
+      <div class="entry-org" data-i18n="e9-org">UFRPE — Universidade Federal Rural de Pernambuco</div>
       <div class="entry-meta">
-        <div class="entry-role">Pesquisador Assistente</div>
+        <div class="entry-role" data-i18n="e9-role">Pesquisador Assistente</div>
         <div class="entry-period">Fev 2010 – Dez 2014</div>
       </div>
       <div class="entry-location">Recife, PE</div>
-      <p>Pesquisa sobre cidadania e participação política entre jovens do semiárido pernambucano, com formações em <strong>inclusão digital</strong> e uso de tecnologias para protagonismo cidadão.</p>
+      <p data-i18n="e9-desc">Pesquisa sobre cidadania e participação política entre jovens do semiárido pernambucano, com formações em <strong>inclusão digital</strong> e uso de tecnologias para protagonismo cidadão.</p>
     </div>
   </section>
 
   <section>
     <div class="section-header">
       <span class="cmd">$ ls</span>
-      <span class="label">ferramentas &amp; skills</span>
+      <span class="label" data-i18n="sec-skills">ferramentas &amp; skills</span>
     </div>
     <div class="skills">
       <span class="skill">ArcGIS</span>
@@ -466,21 +511,21 @@
       <span class="skill">R</span>
       <span class="skill">Python</span>
       <span class="skill">Excel</span>
-      <span class="skill">Monitoramento &amp; Avaliação</span>
-      <span class="skill">Gestão da Informação</span>
-      <span class="skill">Análise de Dados</span>
+      <span class="skill" data-i18n="skill-ma">Monitoramento &amp; Avaliação</span>
+      <span class="skill" data-i18n="skill-im">Gestão da Informação</span>
+      <span class="skill" data-i18n="skill-da">Análise de Dados</span>
     </div>
   </section>
 
   <section>
     <div class="section-header">
       <span class="cmd">$ ls</span>
-      <span class="label">formação acadêmica</span>
+      <span class="label" data-i18n="sec-education">formação acadêmica</span>
     </div>
 
     <div class="edu-item">
       <div>
-        <div class="edu-degree">Mestrado em Desenvolvimento Local</div>
+        <div class="edu-degree" data-i18n="edu1-degree">Mestrado em Desenvolvimento Local</div>
         <div class="edu-inst">UFRPE — Universidade Federal Rural de Pernambuco</div>
       </div>
       <div class="edu-year">2017</div>
@@ -488,7 +533,7 @@
 
     <div class="edu-item">
       <div>
-        <div class="edu-degree">Bacharelado em Ciências Sociais — Sociologia</div>
+        <div class="edu-degree" data-i18n="edu2-degree">Bacharelado em Ciências Sociais — Sociologia</div>
         <div class="edu-inst">UFRPE — Universidade Federal Rural de Pernambuco</div>
       </div>
       <div class="edu-year">2014</div>
@@ -498,13 +543,13 @@
   <section>
     <div class="section-header">
       <span class="cmd">$ ls</span>
-      <span class="label">formação complementar</span>
+      <span class="label" data-i18n="sec-extra">formação complementar</span>
     </div>
 
     <div class="edu-item">
       <div>
-        <div class="edu-degree">Avaliação e Impacto de Programas e Políticas Sociais</div>
-        <div class="edu-inst">ENAP — Escola Nacional de Administração Pública</div>
+        <div class="edu-degree" data-i18n="extra1-degree">Avaliação e Impacto de Programas e Políticas Sociais</div>
+        <div class="edu-inst" data-i18n="extra1-inst">ENAP — Escola Nacional de Administração Pública</div>
       </div>
       <div class="edu-year">2018</div>
     </div>
@@ -520,8 +565,137 @@
 
   <footer>
     <span class="exit">$ exit</span>
-    <span>atualizado em abr/2025</span>
+    <span data-i18n="footer-updated">atualizado em abr/2025</span>
   </footer>
+
+  <script>
+    // ── Translations ──────────────────────────────────────────────
+    const t = {
+      pt: {
+        'role':           '# Analista de Monitoramento · Inteligência de Dados · Gestão da Informação',
+        'download':       'Download CV',
+        'publications':   'Publicações',
+        'sec-profile':    'perfil',
+        'sec-experience': 'experiência profissional',
+        'sec-skills':     'ferramentas & skills',
+        'sec-education':  'formação acadêmica',
+        'sec-extra':      'formação complementar',
+        'profile-text':   'Sociólogo e Mestre em Desenvolvimento Local, com ampla experiência como pesquisador, analista e consultor em políticas sociais, especialmente na área de educação. Atuação em agências, programas e fundos do Sistema ONU no Brasil e no Terceiro Setor. Expertise em análise de dados, monitoramento e avaliação de políticas e programas sociais, com foco em gestão estratégica e melhoria de sistemas educacionais.',
+        'e1-org':   'UNICEF — Fundo das Nações Unidas para a Infância',
+        'e1-role':  'Consultor Especialista em Gestão da Informação e do Conhecimento',
+        'e1-desc':  'Análise quantitativa e qualitativa de dados em educação, proteção social, saúde, nutrição e WASH. Elaboração de relatórios técnicos e desenvolvimento de estratégias de gestão do conhecimento para subsidiar decisões em contextos humanitários — com uso intensivo de <strong>Python</strong>, <strong>R</strong> e ferramentas de visualização de dados.',
+        'e2-role':  'Gestor de Implementação III — Analista de Dados em Políticas Públicas',
+        'e2-desc':  'Monitoramento de projetos junto à Secretaria de Educação de Minas Gerais, com coleta, tratamento e análise de dados sobre matrícula, permanência e aprendizagem. Uso de <strong>Power BI</strong> e <strong>Looker Studio</strong> para construção de painéis e apoio à tomada de decisão de gestores públicos.',
+        'e3-org':   'Movimento Profissão Docente',
+        'e3-role':  'Consultor em Articulação de Redes',
+        'e3-desc':  'Apoio a redes públicas municipais na implementação de políticas de formação docente, com diagnósticos baseados em <strong>indicadores públicos</strong> e <strong>microdados</strong> educacionais e elaboração de propostas técnicas para gestores.',
+        'e4-org':   'Associação Cidade-Escola Aprendiz',
+        'e4-role':  'Assistente de Monitoramento e Avaliação',
+        'e4-desc':  'M&A do programa Busca Ativa Escolar em Serra (ES) e Marabá (PA), com análise de dados, definição de indicadores e acompanhamento do desenvolvimento de sistemas informatizados para <strong>gestão da informação</strong> educacional.',
+        'e5-org':   'UNICEF — Fundo das Nações Unidas para a Infância',
+        'e5-role':  'Consultor Especialista em Gestão da Informação (M&A)',
+        'e5-desc':  'Monitoramento de indicadores de conectividade e infraestrutura escolar (WASH) na Amazônia Legal, com <strong>mapeamento GIS</strong> via <strong>ArcGIS</strong> e <strong>QGIS</strong> para análise espacial e orientação de estratégias locais.',
+        'e6-org':   'IOM — ONU Migrações',
+        'e6-role':  'Assistente em Gestão da Informação (M&A)',
+        'e6-desc':  'Construção do plano de monitoramento e análise de dados para o RMRP 2020 — Plano Regional de Resposta Humanitária a Refugiados Venezuelanos, com foco em <strong>gestão da informação</strong> para inclusão social.',
+        'e7-org':   'UNICEF — Fundo das Nações Unidas para a Infância',
+        'e7-role':  'Oficial de Educação',
+        'e7-desc':  'Coordenação com redes estaduais e municipais de educação em programas nacionais, elaboração de <strong>relatórios analíticos</strong> e orientações técnicas para gestores públicos com base em dados e indicadores educacionais.',
+        'e8-role':  'Pesquisador Assistente',
+        'e8-desc':  'Aplicação, tratamento e <strong>análise de dados</strong> quantitativos na pesquisa "Mobilidade Social, Subjetividades e Classes no Brasil".',
+        'e9-org':   'UFRPE — Universidade Federal Rural de Pernambuco',
+        'e9-role':  'Pesquisador Assistente',
+        'e9-desc':  'Pesquisa sobre cidadania e participação política entre jovens do semiárido pernambucano, com formações em <strong>inclusão digital</strong> e uso de tecnologias para protagonismo cidadão.',
+        'skill-ma': 'Monitoramento & Avaliação',
+        'skill-im': 'Gestão da Informação',
+        'skill-da': 'Análise de Dados',
+        'edu1-degree':    'Mestrado em Desenvolvimento Local',
+        'edu2-degree':    'Bacharelado em Ciências Sociais — Sociologia',
+        'extra1-degree':  'Avaliação e Impacto de Programas e Políticas Sociais',
+        'extra1-inst':    'ENAP — Escola Nacional de Administração Pública',
+        'footer-updated': 'atualizado em abr/2025',
+      },
+      en: {
+        'role':           '# Monitoring Analyst · Data Intelligence · Information Management',
+        'download':       'Download CV',
+        'publications':   'Publications',
+        'sec-profile':    'profile',
+        'sec-experience': 'professional experience',
+        'sec-skills':     'tools & skills',
+        'sec-education':  'academic background',
+        'sec-extra':      'additional training',
+        'profile-text':   'Sociologist and Master in Local Development, with extensive experience as a researcher, analyst, and consultant in social policies, particularly in education. Background in UN agencies, programs, and funds in Brazil and the Third Sector. Expertise in data analysis, monitoring and evaluation of social policies and programs, focused on strategic management and improvement of educational systems.',
+        'e1-org':   'UNICEF — United Nations Children\'s Fund',
+        'e1-role':  'Specialist Consultant in Knowledge and Information Management',
+        'e1-desc':  'Quantitative and qualitative data analysis in education, social protection, health, nutrition, and WASH. Technical report writing and development of knowledge management strategies to support decision-making in humanitarian contexts — with intensive use of <strong>Python</strong>, <strong>R</strong>, and data visualization tools.',
+        'e2-role':  'Implementation Manager III — Public Policy Data Analyst',
+        'e2-desc':  'Project monitoring with the Minas Gerais State Secretariat of Education, including data collection, processing, and analysis on enrollment, retention, and learning outcomes. Use of <strong>Power BI</strong> and <strong>Looker Studio</strong> to build dashboards and support public managers\' decision-making.',
+        'e3-org':   'Movimento Profissão Docente',
+        'e3-role':  'Network Articulation Consultant',
+        'e3-desc':  'Support to municipal public education networks in implementing teacher training policies, with diagnostics based on <strong>public indicators</strong> and educational <strong>microdata</strong> and development of technical proposals for managers.',
+        'e4-org':   'Associação Cidade-Escola Aprendiz',
+        'e4-role':  'Monitoring and Evaluation Assistant',
+        'e4-desc':  'M&E of the Busca Ativa Escolar program in Serra (ES) and Marabá (PA), with data analysis, indicator definition, and oversight of computerized systems development for educational <strong>information management</strong>.',
+        'e5-org':   'UNICEF — United Nations Children\'s Fund',
+        'e5-role':  'Specialist Consultant in Information Management (M&E)',
+        'e5-desc':  'Monitoring of school connectivity and infrastructure indicators (WASH) in the Legal Amazon, using <strong>GIS mapping</strong> via <strong>ArcGIS</strong> and <strong>QGIS</strong> for spatial analysis and local strategy guidance.',
+        'e6-org':   'IOM — UN Migration',
+        'e6-role':  'Information Management Assistant (M&E)',
+        'e6-desc':  'Development of the monitoring plan and data analysis for the RMRP 2020 — Regional Refugee and Migrant Response Plan for Venezuelans, focused on <strong>information management</strong> for social inclusion.',
+        'e7-org':   'UNICEF — United Nations Children\'s Fund',
+        'e7-role':  'Education Officer',
+        'e7-desc':  'Coordination with state and municipal education networks in national programs, preparation of <strong>analytical reports</strong> and technical guidance for public managers based on educational data and indicators.',
+        'e8-role':  'Research Assistant',
+        'e8-desc':  'Application, processing, and <strong>data analysis</strong> for the quantitative research "Social Mobility, Subjectivities, and Classes in Brazil".',
+        'e9-org':   'UFRPE — Federal Rural University of Pernambuco',
+        'e9-role':  'Research Assistant',
+        'e9-desc':  'Research on citizenship and political participation among youth in the semi-arid region of Pernambuco, with training in <strong>digital inclusion</strong> and technology use for civic empowerment.',
+        'skill-ma': 'Monitoring & Evaluation',
+        'skill-im': 'Information Management',
+        'skill-da': 'Data Analysis',
+        'edu1-degree':    'Master\'s in Local Development',
+        'edu2-degree':    'Bachelor\'s in Social Sciences — Sociology',
+        'extra1-degree':  'Evaluation and Impact of Social Programs and Policies',
+        'extra1-inst':    'ENAP — National School of Public Administration',
+        'footer-updated': 'updated Apr/2025',
+      }
+    };
+
+    // ── Apply language ─────────────────────────────────────────────
+    const langBtn  = document.getElementById('lang-btn');
+    const themeBtn = document.getElementById('theme-btn');
+
+    function applyLang(lang) {
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[lang][key] !== undefined) el.innerHTML = t[lang][key];
+      });
+      langBtn.textContent = lang === 'pt' ? '[ en ]' : '[ pt ]';
+    }
+
+    function toggleLang() {
+      const next = document.documentElement.lang === 'pt-BR' ? 'en' : 'pt';
+      localStorage.setItem('lang', next);
+      applyLang(next);
+    }
+
+    // ── Apply theme ────────────────────────────────────────────────
+    function applyTheme(theme) {
+      document.body.classList.toggle('light', theme === 'light');
+      themeBtn.textContent = theme === 'light' ? '[ dark ]' : '[ light ]';
+    }
+
+    function toggleTheme() {
+      const next = document.body.classList.contains('light') ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    }
+
+    // ── Init ───────────────────────────────────────────────────────
+    applyTheme(localStorage.getItem('theme') || 'dark');
+    applyLang(localStorage.getItem('lang') || 'pt');
+  </script>
 
 </body>
 </html>
