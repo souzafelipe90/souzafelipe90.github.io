@@ -422,7 +422,27 @@
   </section>
 
   <section>
-    <div class="section-header collapsible" onclick="toggleSection(this)">
+    <div class="section-header">
+      <span class="cmd">$ ls</span>
+      <span class="label" data-i18n="sec-skills">ferramentas &amp; skills</span>
+    </div>
+    <div class="skills">
+      <span class="skill">ArcGIS</span>
+      <span class="skill">QGIS</span>
+      <span class="skill">Power BI</span>
+      <span class="skill">Tableau</span>
+      <span class="skill">Looker Studio</span>
+      <span class="skill">R</span>
+      <span class="skill">Python</span>
+      <span class="skill">Excel</span>
+      <span class="skill" data-i18n="skill-ma">Monitoramento &amp; Avaliação</span>
+      <span class="skill" data-i18n="skill-im">Gestão da Informação</span>
+      <span class="skill" data-i18n="skill-da">Análise de Dados</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header collapsible collapsed" onclick="toggleSection(this)">
       <span class="cmd">$ cat</span>
       <span class="label" data-i18n="sec-experience">experiência profissional</span>
     </div>
@@ -540,29 +560,7 @@
   </section>
 
   <section>
-    <div class="section-header collapsible" onclick="toggleSection(this)">
-      <span class="cmd">$ ls</span>
-      <span class="label" data-i18n="sec-skills">ferramentas &amp; skills</span>
-    </div>
-    <div class="section-body">
-    <div class="skills">
-      <span class="skill">ArcGIS</span>
-      <span class="skill">QGIS</span>
-      <span class="skill">Power BI</span>
-      <span class="skill">Tableau</span>
-      <span class="skill">Looker Studio</span>
-      <span class="skill">R</span>
-      <span class="skill">Python</span>
-      <span class="skill">Excel</span>
-      <span class="skill" data-i18n="skill-ma">Monitoramento &amp; Avaliação</span>
-      <span class="skill" data-i18n="skill-im">Gestão da Informação</span>
-      <span class="skill" data-i18n="skill-da">Análise de Dados</span>
-    </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-header collapsible" onclick="toggleSection(this)">
+    <div class="section-header collapsible collapsed" onclick="toggleSection(this)">
       <span class="cmd">$ ls</span>
       <span class="label" data-i18n="sec-education">formação acadêmica</span>
     </div>
@@ -586,7 +584,7 @@
   </section>
 
   <section>
-    <div class="section-header collapsible" onclick="toggleSection(this)">
+    <div class="section-header collapsible collapsed" onclick="toggleSection(this)">
       <span class="cmd">$ ls</span>
       <span class="label" data-i18n="sec-extra">formação complementar</span>
     </div>
@@ -781,6 +779,11 @@
     // ── Init ───────────────────────────────────────────────────────
     applyTheme(localStorage.getItem('theme') || 'dark');
     applyLang(localStorage.getItem('lang') || 'pt');
+
+    document.querySelectorAll('.section-header.collapsed').forEach(header => {
+      const body = header.nextElementSibling;
+      if (body) { body.style.maxHeight = '0px'; body.style.opacity = '0'; }
+    });
   </script>
 
 </body>
