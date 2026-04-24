@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felipe Souza — CV</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #d4d4d4;
+      --muted: #666;
+      --dim: #444;
+      --orange: #d97706;
+      --orange-dim: #92400e;
+      --green: #4ade80;
+      --white: #f5f5f5;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .dot-red   { background: #ff5f57; }
+    .dot-yellow{ background: #febc2e; }
+    .dot-green { background: #28c840; }
+
+    .topbar-path {
+      margin-left: 12px;
+      color: var(--muted);
+    }
+
+    .topbar-path .seg { color: var(--orange); }
+
+    /* Header */
+    header { margin-bottom: 40px; }
+
+    .header-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid var(--orange);
+      object-fit: cover;
+      object-position: center 18%;
+      flex-shrink: 0;
+      filter: grayscale(20%);
+    }
+
+    .header-text { flex: 1; }
+
+    .prompt-line {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .prompt { color: var(--orange); user-select: none; }
+    .prompt-cmd { color: var(--white); font-size: 15px; }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: normal;
+      color: var(--white);
+      letter-spacing: 0.3px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.1em;
+      background: var(--orange);
+      vertical-align: text-bottom;
+      margin-left: 4px;
+      animation: blink 1.1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .header-role {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+      margin-left: 20px;
+    }
+
+    .header-contact {
+      margin-top: 10px;
+      margin-left: 20px;
+      font-size: 13px;
+    }
+
+    .header-contact a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .header-contact a:hover { text-decoration: underline; }
+
+    .header-contact .sep { color: var(--dim); margin: 0 10px; }
+
+    /* Sections */
+    section { margin-bottom: 40px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+
+    .section-header .cmd {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .section-header .label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 11px;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Summary */
+    .summary-text {
+      margin-left: 20px;
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.8;
+      border-left: 2px solid var(--orange-dim);
+      padding-left: 16px;
+    }
+
+    /* Experience entries */
+    .entry {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .entry-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .entry-org {
+      font-size: 12px;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .entry-period {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .entry-role {
+      color: var(--white);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .entry-location {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+
+    .entry p {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .entry p strong {
+      color: var(--orange);
+      font-weight: normal;
+    }
+
+    /* Education */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .edu-item:first-child { border-top: 1px solid var(--border); }
+
+    .edu-degree {
+      color: var(--white);
+      font-size: 13.5px;
+    }
+
+    .edu-inst {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .edu-year {
+      font-size: 12px;
+      color: var(--orange);
+      white-space: nowrap;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill {
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .skill:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer .exit { color: var(--orange); }
+
+    @media (max-width: 500px) {
+      body { padding: 32px 16px 60px; }
+      .entry-meta { flex-direction: column; gap: 2px; }
+      .edu-item { flex-direction: column; gap: 4px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; padding: 0; }
+      :root { --bg: #fff; --text: #111; --white: #000; --orange: #c05e00; --muted: #555; --dim: #777; --border: #ccc; --green: #1a7a3a; }
+      .dot, .cursor, .topbar { display: none; }
+      .summary-text { border-color: #c05e00; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="dot dot-red"></span>
+    <span class="dot dot-yellow"></span>
+    <span class="dot dot-green"></span>
+    <span class="topbar-path">
+      ~/<span class="seg">felipe-souza</span>/<span class="seg">cv.md</span>
+    </span>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <img class="avatar" src="photo.jpg" alt="Felipe Souza">
+      <div class="header-text">
+        <div class="prompt-line">
+          <span class="prompt">$</span>
+          <span class="prompt-cmd">whoami</span>
+        </div>
+        <h1>Felipe Souza<span class="cursor"></span></h1>
+        <p class="header-role"># Analista de Monitoramento · Inteligência de Dados · Gestão da Informação</p>
+        <p class="header-contact">
+          <a href="https://wa.me/5561982236407" target="_blank" rel="noopener">(61) 98223-6407</a>
+          <span class="sep">|</span>
+          <a href="mailto:souzafelipe373@gmail.com">souzafelipe373@gmail.com</a>
+          <span class="sep">|</span>
+          <a href="https://github.com/souzafelipe90" target="_blank" rel="noopener">GitHub</a>
+          <span class="sep">|</span>
+          <a href="https://br.linkedin.com/in/oifelipe" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-header">
+      <span class="cmd">$ cat</span>
+      <span class="label">perfil</span>
+    </div>
+    <p class="summary-text">
+      Sociólogo e Mestre em Desenvolvimento Local, com ampla experiência como pesquisador,
+      analista e consultor em políticas sociais, especialmente na área de educação. Atuação
+      em agências, programas e fundos do Sistema ONU no Brasil e no Terceiro Setor. Expertise
+      em análise de dados, monitoramento e avaliação de políticas e programas sociais, com
+      foco em gestão estratégica e melhoria de sistemas educacionais.
+    </p>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="cmd">$ cat</span>
+      <span class="label">experiência profissional</span>
+    </div>
+    <div class="entry">
+      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-meta">
+        <div class="entry-role">Consultor Especialista em Gestão da Informação e do Conhecimento</div>
+        <div class="entry-period">Dez 2023 – Mar 2025</div>
+      </div>
+      <div class="entry-location">Home-based</div>
+      <p>Análise quantitativa e qualitativa de dados em educação, proteção social, saúde, nutrição e WASH. Elaboração de relatórios técnicos e desenvolvimento de estratégias de gestão do conhecimento para subsidiar decisões em contextos humanitários — com uso intensivo de <strong>Python</strong>, <strong>R</strong> e ferramentas de visualização de dados.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">Instituto Unibanco</div>
+      <div class="entry-meta">
+        <div class="entry-role">Gestor de Implementação III — Analista de Dados em Políticas Públicas</div>
+        <div class="entry-period">Set 2022 – Out 2023</div>
+      </div>
+      <div class="entry-location">São Paulo, SP</div>
+      <p>Monitoramento de projetos junto à Secretaria de Educação de Minas Gerais, com coleta, tratamento e análise de dados sobre matrícula, permanência e aprendizagem. Uso de <strong>Power BI</strong> e <strong>Looker Studio</strong> para construção de painéis e apoio à tomada de decisão de gestores públicos.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">Movimento Profissão Docente</div>
+      <div class="entry-meta">
+        <div class="entry-role">Consultor em Articulação de Redes</div>
+        <div class="entry-period">Set 2021 – Mai 2022</div>
+      </div>
+      <div class="entry-location">São Paulo, SP / Joinville, SC</div>
+      <p>Apoio a redes públicas municipais na implementação de políticas de formação docente, com diagnósticos baseados em <strong>indicadores públicos</strong> e <strong>microdados</strong> educacionais e elaboração de propostas técnicas para gestores.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">Associação Cidade-Escola Aprendiz</div>
+      <div class="entry-meta">
+        <div class="entry-role">Assistente de Monitoramento e Avaliação</div>
+        <div class="entry-period">Set 2021 – Dez 2021</div>
+      </div>
+      <div class="entry-location">Home-based</div>
+      <p>M&amp;A do programa Busca Ativa Escolar em Serra (ES) e Marabá (PA), com análise de dados, definição de indicadores e acompanhamento do desenvolvimento de sistemas informatizados para <strong>gestão da informação</strong> educacional.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-meta">
+        <div class="entry-role">Consultor Especialista em Gestão da Informação (M&amp;A)</div>
+        <div class="entry-period">Set 2020 – Abr 2021</div>
+      </div>
+      <div class="entry-location">Home-based</div>
+      <p>Monitoramento de indicadores de conectividade e infraestrutura escolar (WASH) na Amazônia Legal, com <strong>mapeamento GIS</strong> via <strong>ArcGIS</strong> e <strong>QGIS</strong> para análise espacial e orientação de estratégias locais.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">IOM — ONU Migrações</div>
+      <div class="entry-meta">
+        <div class="entry-role">Assistente em Gestão da Informação (M&amp;A)</div>
+        <div class="entry-period">Ago 2019 – Dez 2019</div>
+      </div>
+      <div class="entry-location">Brasília, DF</div>
+      <p>Construção do plano de monitoramento e análise de dados para o RMRP 2020 — Plano Regional de Resposta Humanitária a Refugiados Venezuelanos, com foco em <strong>gestão da informação</strong> para inclusão social.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">UNICEF — Fundo das Nações Unidas para a Infância</div>
+      <div class="entry-meta">
+        <div class="entry-role">Oficial de Educação</div>
+        <div class="entry-period">Jun 2018 – Ago 2019</div>
+      </div>
+      <div class="entry-location">Brasília, DF</div>
+      <p>Coordenação com redes estaduais e municipais de educação em programas nacionais, elaboração de <strong>relatórios analíticos</strong> e orientações técnicas para gestores públicos com base em dados e indicadores educacionais.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">SUNY New Paltz — State University of New York</div>
+      <div class="entry-meta">
+        <div class="entry-role">Pesquisador Assistente</div>
+        <div class="entry-period">Ago 2016 – Set 2017</div>
+      </div>
+      <div class="entry-location">Recife, PE</div>
+      <p>Aplicação, tratamento e <strong>análise de dados</strong> quantitativos na pesquisa "Mobilidade Social, Subjetividades e Classes no Brasil".</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-org">UFRPE — Universidade Federal Rural de Pernambuco</div>
+      <div class="entry-meta">
+        <div class="entry-role">Pesquisador Assistente</div>
+        <div class="entry-period">Fev 2010 – Dez 2014</div>
+      </div>
+      <div class="entry-location">Recife, PE</div>
+      <p>Pesquisa sobre cidadania e participação política entre jovens do semiárido pernambucano, com formações em <strong>inclusão digital</strong> e uso de tecnologias para protagonismo cidadão.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="cmd">$ ls</span>
+      <span class="label">ferramentas &amp; skills</span>
+    </div>
+    <div class="skills">
+      <span class="skill">ArcGIS</span>
+      <span class="skill">QGIS</span>
+      <span class="skill">Power BI</span>
+      <span class="skill">Tableau</span>
+      <span class="skill">Looker Studio</span>
+      <span class="skill">R</span>
+      <span class="skill">Python</span>
+      <span class="skill">Excel</span>
+      <span class="skill">Monitoramento &amp; Avaliação</span>
+      <span class="skill">Gestão da Informação</span>
+      <span class="skill">Análise de Dados</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="cmd">$ ls</span>
+      <span class="label">formação acadêmica</span>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Mestrado em Desenvolvimento Local</div>
+        <div class="edu-inst">UFRPE — Universidade Federal Rural de Pernambuco</div>
+      </div>
+      <div class="edu-year">2017</div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Bacharelado em Ciências Sociais — Sociologia</div>
+        <div class="edu-inst">UFRPE — Universidade Federal Rural de Pernambuco</div>
+      </div>
+      <div class="edu-year">2014</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="cmd">$ ls</span>
+      <span class="label">formação complementar</span>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Avaliação e Impacto de Programas e Políticas Sociais</div>
+        <div class="edu-inst">ENAP — Escola Nacional de Administração Pública</div>
+      </div>
+      <div class="edu-year">2018</div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Results-based Management</div>
+        <div class="edu-inst">UNICEF</div>
+      </div>
+      <div class="edu-year">2019</div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="exit">$ exit</span>
+    <span>atualizado em abr/2025</span>
+  </footer>
+
+</body>
+</html>
