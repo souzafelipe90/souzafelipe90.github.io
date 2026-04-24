@@ -329,6 +329,34 @@
 
     footer .exit { color: var(--orange); }
 
+    /* Collapsible sections */
+    .section-header.collapsible {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-header.collapsible::before {
+      content: '[-]';
+      color: var(--muted);
+      font-size: 11px;
+      margin-right: 6px;
+      transition: color 0.15s;
+    }
+
+    .section-header.collapsible.collapsed::before {
+      content: '[+]';
+    }
+
+    .section-header.collapsible:hover::before,
+    .section-header.collapsible:hover .label {
+      color: var(--orange);
+    }
+
+    .section-body {
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.25s ease;
+    }
+
     @media (max-width: 500px) {
       body { padding: 32px 16px 60px; }
       .entry-meta { flex-direction: column; gap: 2px; }
@@ -374,14 +402,6 @@
           <a href="https://github.com/souzafelipe90" target="_blank" rel="noopener">GitHub</a>
           <span class="sep">|</span>
           <a href="https://br.linkedin.com/in/oifelipe" target="_blank" rel="noopener">LinkedIn</a>
-          <span class="sep">|</span>
-          <a href="#" download data-i18n="download">Download CV</a>
-          <span class="sep">|</span>
-          <a href="#">Datasets</a>
-          <span class="sep">|</span>
-          <a href="#">Scripts</a>
-          <span class="sep">|</span>
-          <a href="#" data-i18n="publications">Publicações</a>
         </p>
       </div>
     </div>
@@ -402,10 +422,11 @@
   </section>
 
   <section>
-    <div class="section-header">
+    <div class="section-header collapsible" onclick="toggleSection(this)">
       <span class="cmd">$ cat</span>
       <span class="label" data-i18n="sec-experience">experiência profissional</span>
     </div>
+    <div class="section-body">
     <div class="entry">
       <div class="entry-org" data-i18n="ob-org">Observatório da Branquitude</div>
       <div class="entry-meta">
@@ -515,13 +536,15 @@
       <div class="entry-location">Recife, PE</div>
       <p data-i18n="e9-desc">Pesquisa sobre cidadania e participação política entre jovens do semiárido pernambucano, com formações em <strong>inclusão digital</strong> e uso de tecnologias para protagonismo cidadão.</p>
     </div>
+    </div>
   </section>
 
   <section>
-    <div class="section-header">
+    <div class="section-header collapsible" onclick="toggleSection(this)">
       <span class="cmd">$ ls</span>
       <span class="label" data-i18n="sec-skills">ferramentas &amp; skills</span>
     </div>
+    <div class="section-body">
     <div class="skills">
       <span class="skill">ArcGIS</span>
       <span class="skill">QGIS</span>
@@ -535,14 +558,15 @@
       <span class="skill" data-i18n="skill-im">Gestão da Informação</span>
       <span class="skill" data-i18n="skill-da">Análise de Dados</span>
     </div>
+    </div>
   </section>
 
   <section>
-    <div class="section-header">
+    <div class="section-header collapsible" onclick="toggleSection(this)">
       <span class="cmd">$ ls</span>
       <span class="label" data-i18n="sec-education">formação acadêmica</span>
     </div>
-
+    <div class="section-body">
     <div class="edu-item">
       <div>
         <div class="edu-degree" data-i18n="edu1-degree">Mestrado em Desenvolvimento Local</div>
@@ -558,14 +582,15 @@
       </div>
       <div class="edu-year">2014</div>
     </div>
+    </div>
   </section>
 
   <section>
-    <div class="section-header">
+    <div class="section-header collapsible" onclick="toggleSection(this)">
       <span class="cmd">$ ls</span>
       <span class="label" data-i18n="sec-extra">formação complementar</span>
     </div>
-
+    <div class="section-body">
     <div class="edu-item">
       <div>
         <div class="edu-degree" data-i18n="extra1-degree">Avaliação e Impacto de Programas e Políticas Sociais</div>
@@ -580,6 +605,7 @@
         <div class="edu-inst">UNICEF</div>
       </div>
       <div class="edu-year">2019</div>
+    </div>
     </div>
   </section>
 
@@ -724,6 +750,32 @@
       const next = document.body.classList.contains('light') ? 'dark' : 'light';
       localStorage.setItem('theme', next);
       applyTheme(next);
+    }
+
+    // ── Collapsible sections ───────────────────────────────────────
+    function toggleSection(header) {
+      const body = header.nextElementSibling;
+      const isOpen = !header.classList.contains('collapsed');
+
+      if (isOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+        requestAnimationFrame(() => {
+          body.style.maxHeight = '0px';
+          body.style.opacity = '0';
+        });
+        header.classList.add('collapsed');
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+        body.addEventListener('transitionend', function once(e) {
+          if (e.propertyName === 'max-height') {
+            body.style.maxHeight = 'none';
+            body.removeEventListener('transitionend', once);
+          }
+        });
+        header.classList.remove('collapsed');
+      }
     }
 
     // ── Init ───────────────────────────────────────────────────────
